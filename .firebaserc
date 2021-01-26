@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "trenteansmaylis": {
+      "hosting": {
+        "trenteansmaylis": [
+          "trenteansmaylis"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "trenteansmaylis"
+  }
+}

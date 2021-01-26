@@ -1,0 +1,23 @@
+<div class="container-fluid p-0">
+  <div class="d-flex col" [ngClass]="{'py-1': ((auth.userDetail?.uid === pictures[currentSlideId].uploadedByUserId) || (auth.userDetail ? auth.userDetail.admin : false) ),'py-2': !((auth.userDetail?.uid === pictures[currentSlideId].uploadedByUserId) || (auth.userDetail ? auth.userDetail.admin : false) ) }">
+    <fa-icon [icon]="faCaretLeft" class="mr-auto p-2 pointer d-block d-md-none" (click)="activeModal.dismiss('Cross click')"></fa-icon>
+    <fa-icon [icon]="faTrashAlt" class="p-2" (click)="delete()" [ngClass]="{'text-secondary': !((auth.userDetail?.uid === pictures[currentSlideId].uploadedByUserId) || (auth.userDetail ? auth.userDetail.admin : false)), 'pointer': (auth.userDetail?.uid === pictures[currentSlideId].uploadedByUserId) || (auth.userDetail ? auth.userDetail.admin : false)}"></fa-icon>
+    <!--<a [href]="pictures[index].downloadURL" class="text-body p-2 pointer" download="file"><fa-icon [icon]="faDownload"></fa-icon></a>-->
+    <fa-icon [icon]="faDownload" class="p-2" [ngClass]="{'text-secondary': !((auth.userDetail?.uid === pictures[currentSlideId].uploadedByUserId) || (auth.userDetail ? auth.userDetail.admin : false)), 'pointer': (auth.userDetail?.uid === pictures[currentSlideId].uploadedByUserId) || (auth.userDetail ? auth.userDetail.admin : false)}" (click)="download(pictures[index])"></fa-icon>
+    <button type="button" class="close d-none d-md-block ml-auto" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <ngb-carousel *ngIf="pictures" [showNavigationArrows]="true" [interval]="999999999" style="outline:none" [activeId]="index.toString()" (slide)="onSlide($event)">
+      <ng-template ngbSlide *ngFor="let picture of pictures; index as i" id="{{i}}">
+          <div class="picsum-img-wrapper">
+            <img class="w-100" [src]="picture.downloadURL">
+          </div>
+          <div class="modal-footer font-italic py-2">
+            <span ngbAutoFocus class="m-0">Publiée par</span>
+            <span *ngIf="auth.userDetail?.uid !== picture.uploadedByUserId">{{picture.uploadedByUserDisplayName}}</span>
+            <span *ngIf="auth.userDetail?.uid === picture.uploadedByUserId">moi</span>
+          </div>
+      </ng-template>
+  </ngb-carousel>
+</div>

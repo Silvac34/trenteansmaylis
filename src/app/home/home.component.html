@@ -1,0 +1,35 @@
+<div class="container-fluid my-3">
+  <h4 class="text-body mb-3 text-center font-italic">30 ans en quelques images...</h4>
+  <ng-container *ngIf="pictures | async as pictures; else loading">
+    <div *ngIf="pictures.length > 0; else noPictures">
+      <div class="card-columns">
+        <div class="card" style="cursor: pointer" *ngFor="let picture of pictures; index as i" (click)="openFullScreen(pictures, i)">
+          <img [src]="picture.downloadURL" class="card-img-top">
+          <div class="card-body">
+            <figure>
+              <blockquote class="blockquote">
+                <p class="small">{{picture.comment}}</p>
+              </blockquote>
+              <figcaption class="blockquote-footer">
+                <cite title="Auteur">{{picture.uploadedByUserDisplayName}}</cite>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <nav aria-label="..." *ngIf="seeMorePictures">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <span class="page-link" style="cursor: pointer" href="#" (click)="getMorePictures()">Voir plus</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <ng-template #noPictures>
+      <div class="text-center font-italic text-info my-5">Il n'y a pas encore eu de photos publiées</div>
+    </ng-template>
+  </ng-container>
+  <ng-template #loading>
+    <div class="text-center text-info my-5">Chargement des photos</div>
+  </ng-template>
+</div>

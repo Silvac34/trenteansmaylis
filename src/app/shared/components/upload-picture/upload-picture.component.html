@@ -1,0 +1,58 @@
+<div class="modal-header" ngbAutoFocus>
+  <div class="h5 modal-title">Ajouter une photo</div>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div *ngFor="let url of images; index as i; last as isLast;">
+    <div class="card border-0">
+      <div *ngIf="!cropItem[i]">
+        <img [attr.src]="url" class="w-100" />
+        <div class="card-img-overlay d-flex align-items-start justify-content-end p-0">
+          <button class="btn rounded-0" style="background-color: rgba(255, 255, 255, 0.75)" (click)="switchCrop(i)">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+          <button class="btn rounded-0" *ngIf="!(isLast && i === 0)" style="background-color: rgba(255, 255, 255, 0.75) " (click)="delete(i)">
+            <fa-icon [icon]="faTrashAlt"></fa-icon>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="cropItem[i]">
+
+        <image-cropper [imageBase64]="url"
+                       [maintainAspectRatio]="true"
+                       [resizeToWidth]="800"
+                       [cropperMinWidth]="200"
+                       [cropperMinHeight]="200"
+                       [canvasRotation]="rotation"
+                       format="png"
+                       (imageCropped)="imageCropped($event)"></image-cropper>
+        <div class="d-flex justify-content-center mt-2">
+          <button type="button" class="btn btn-sm mx-2" (click)="rotate(-1)"><fa-icon [icon]="faUndo"></fa-icon></button>
+          <button type="button" class="btn btn-sm mx-2" (click)="rotate(1)"><fa-icon [icon]="faRedo"></fa-icon></button>
+        </div>
+        <div class="d-flex justify-content-center mt-2">
+          <button type="button" class="btn btn-outline-danger btn-sm mx-2" (click)="switchCrop(i)"><fa-icon class="mr-1" [icon]="faTimesCircle"></fa-icon><span>Annuler</span></button>
+          <button type="button" class="btn btn-outline-primary btn-sm mx-2" (click)="crop(i)"><fa-icon class="mr-1" [icon]="faCheck"></fa-icon><span>Valider</span></button>
+        </div>
+      </div>
+    </div>
+    <form>
+      <div class="my-2 text-center">
+        <textarea class="form-control" id="exampleFormControlTextarea1" [name]="'inputComment'+i" placeholder="Votre commentaire sera associé à cette photo" rows="2" [(ngModel)]="comments[i]"></textarea>
+      </div>
+      <div class="my-2">
+        <label for="inputDate" class="form-label">De quelle période date la photo <small>(seul le mois et l'année importent)</small></label>
+        <input type="date" class="form-control" id="inputDate" [name]="'inputDate'+i" [(ngModel)]="pictureDates[i]"/>
+      </div>
+    </form>
+
+
+    <hr *ngIf="!isLast && images.length > 1" />
+  </div>
+  </div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-warning" (click)="activeModal.dismiss('Close click')">Annuler</button>
+  <button type="button" class="btn btn-primary" (click)="uploadPictures(images)">Ajouter</button>
+</div>

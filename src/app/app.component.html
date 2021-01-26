@@ -1,0 +1,24 @@
+<ng-container *appAppShellNoRender>
+  <ng-progress [spinner]="false" [color]="'#033c73'"></ng-progress>
+  <ngx-spinner type="pacman" size="medium" color="#f6d860"><p style="color: #f6d860" class="h2">Chargement</p></ngx-spinner>
+</ng-container>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/home">30 balais</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/home">Voir toutes les photos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/friends">Ajouter des photos</a>
+        </li>
+      </ul>
+      <button *ngIf="auth.isLoggedIn" class="btn btn-primary ml-auto" type="button" (click)="auth.signOut()">Se déconnecter</button>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

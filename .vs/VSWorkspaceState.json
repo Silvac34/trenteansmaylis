@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\home",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\components",
+    "\\src\\app\\shared\\components\\see-pictures",
+    "\\src\\app\\shared\\interfaces",
+    "\\src\\app\\shared\\services",
+    "\\src\\app\\shared\\services\\toasts"
+  ],
+  "SelectedNode": "\\src\\app\\shared\\components\\see-pictures\\see-pictures.component.ts",
+  "PreviewInSolutionExplorer": false
+}
