@@ -3,7 +3,10 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\home"
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\components\\see-pictures",
+    "\\src\\app\\shared\\services\\auth"
   ],
+  "SelectedNode": "\\src\\app\\shared\\services",
   "PreviewInSolutionExplorer": false
 }

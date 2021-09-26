@@ -1,4 +1,8 @@
 {
+  "projects": {
+    "default": "trenteansmaylis",
+    "30anscamille": "trente-ans-camille"
+  },
   "targets": {
     "trenteansmaylis": {
       "hosting": {
@@ -7,8 +11,5 @@
         ]
       }
     }
-  },
-  "projects": {
-    "default": "trenteansmaylis"
   }
 }

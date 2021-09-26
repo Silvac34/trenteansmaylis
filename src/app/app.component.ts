@@ -7,7 +7,7 @@ import { AuthService } from './shared/services/auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'trenteansmaylis';
+  title = 'trenteanscamille';
   isCollapsed = true;
   constructor(
     public auth: AuthService

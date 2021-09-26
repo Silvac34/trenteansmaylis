@@ -3,4 +3,4 @@ Disallow: /
 Disallow: /friends
 Disallow: /home
 
-Sitemap: https://trenteansmaylis.web.app/sitemap.xml
+Sitemap: https://trente-ans-camille.web.app/sitemap.xml

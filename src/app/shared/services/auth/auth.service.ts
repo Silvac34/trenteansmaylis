@@ -2,12 +2,6 @@ import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import firebase from 'firebase/app';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
-
-const now = new Date();
 
 interface dataforsignup {
   email: string;
@@ -32,10 +26,7 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     public router: Router,
-    @Inject(PLATFORM_ID) private platformId: object,
-    private spinnerService: NgxSpinnerService,
-    private storage: AngularFireStorage,
-    private analytics: AngularFireAnalytics
+    @Inject(PLATFORM_ID) private platformId: object
   ) {
     // si l'utilisateur existe dans le stockage du navigateur
     if (isPlatformBrowser(this.platformId) && localStorage.getItem('user') !== 'null' && !!localStorage.getItem('user')) {

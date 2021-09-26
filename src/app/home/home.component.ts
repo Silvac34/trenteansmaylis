@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { SeePicturesComponent } from '../shared/components/see-pictures/see-pictures.component';
 import { Picture } from '../shared/interfaces/picture';
-import { take, map, takeUntil } from 'rxjs/operators';
+import { take, map, takeUntil, startWith } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -14,6 +14,7 @@ import { environment } from '../../environments/environment';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   pictures!: Observable<Picture[]>;
+  picArr!: Picture[];
   limitNbDisplayedPicture = environment.production ? 20 : 5;
   public seeMorePictures = true;
   // lastPictureDoc est la dernière revie de la liste de review en cours de visibilité
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.pictures = picturesCol.valueChanges({ idField: 'pid' });
     this.subscriptionPicture = this.pictures.subscribe((arr: Picture[]) => {
       this.seeMorePictures = !(arr.length < this.limitNbDisplayedPicture);
+      this.picArr = arr;
     })
     this.snapPictureSubscription = picturesCol.snapshotChanges().subscribe(snaps => {
       this.lastPictureDoc = snaps.length > 0 ? snaps.pop()?.payload.doc : null;
@@ -56,10 +58,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.updateLastDoc(newPicturesRef);
     const newPictures = newPicturesRef.valueChanges();
     this.pictures = combineLatest([this.pictures, newPictures]).pipe(map((arr: [Picture[], Picture[]]) => {
-      if (arr[1].length < this.limitNbDisplayedPicture) { this.seeMorePictures = false; }
-      return arr[0].concat(arr[1]);
+      if (arr[1].length < this.limitNbDisplayedPicture) { this.seeMorePictures = false; };
+      this.picArr = arr[0].concat(arr[1])
+      return this.picArr;
     }),
-      takeUntil(this.destroy$));
+      takeUntil(this.destroy$),
+      startWith(this.picArr)
+    );
   }
 
   updateLastDoc(ref: any) {
