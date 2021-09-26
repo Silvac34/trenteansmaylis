@@ -25,6 +25,7 @@ export class FriendsComponent implements OnInit {
   public errorAccountExists = false;
   public errorUserAlreadyInUse = false;
   public errorOther = false;
+  public birthdayPerson = "Camille";
 
   constructor(
     private imageCompress: ImgCompressService,

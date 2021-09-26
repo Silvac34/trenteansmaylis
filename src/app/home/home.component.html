@@ -1,9 +1,9 @@
 <div class="container-fluid my-3">
   <h4 class="text-body mb-3 text-center font-italic">30 ans en quelques images...</h4>
   <ng-container *ngIf="pictures | async as pictures; else loading">
-    <div *ngIf="pictures.length > 0; else noPictures">
-      <div class="card-columns">
-        <div class="card" style="cursor: pointer" *ngFor="let picture of pictures; index as i" (click)="openFullScreen(pictures, i)">
+    <div class="row row-cols-1 row-cols-md-3" *ngIf="pictures.length > 0; else noPictures">
+      <div class="col mb-4" style="cursor: pointer" *ngFor="let picture of pictures; index as i" (click)="openFullScreen(pictures, i)">
+        <div class="card" [attr.id]="picture.pid">
           <img [src]="picture.downloadURL" class="card-img-top">
           <div class="card-body">
             <figure>
@@ -17,14 +17,14 @@
           </div>
         </div>
       </div>
-      <nav aria-label="..." *ngIf="seeMorePictures">
-        <ul class="pagination justify-content-center">
-          <li class="page-item">
-            <span class="page-link" style="cursor: pointer" href="#" (click)="getMorePictures()">Voir plus</span>
-          </li>
-        </ul>
-      </nav>
     </div>
+    <nav aria-label="..." *ngIf="seeMorePictures">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <span class="page-link" style="cursor: pointer" href="#" (click)="getMorePictures()">Voir plus</span>
+        </li>
+      </ul>
+    </nav>
     <ng-template #noPictures>
       <div class="text-center font-italic text-info my-5">Il n'y a pas encore eu de photos publiées</div>
     </ng-template>

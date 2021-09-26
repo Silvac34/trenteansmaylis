@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /
+Disallow: /friends
+Disallow: /home
+
+Sitemap: https://trenteansmaylis.web.app/sitemap.xml

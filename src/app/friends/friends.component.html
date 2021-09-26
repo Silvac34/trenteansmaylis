@@ -2,7 +2,7 @@
   <div *ngIf="auth.isLoggedIn" class="d-flex justify-content-center my-4">
     Bienvenue {{auth.userDetail?.displayName}}
   </div>
-  <div>L'objectif de ce site est de créer une frise photo qui relate la vie de Maylis.</div>
+  <div>L'objectif de ce site est de créer une frise photo qui relate la vie de {{birthdayPerson}}. Si vous n'avez pas de photos de/avec {{birthdayPerson}}, vous pouvez aussi mettre une photo de vous et laisser un commentaire évidemment ;)</div>
   <div>Après ajout de vos photos, elles apparaîtront sur la page d'accueil.</div>
   <div *ngIf="!auth.isLoggedIn">Avant de pouvoir charger des photos, j'ai besoin de savoir qui vous êtes : </div>
   <div class="d-flex justify-content-center my-4" *ngIf="!auth.isLoggedIn">
